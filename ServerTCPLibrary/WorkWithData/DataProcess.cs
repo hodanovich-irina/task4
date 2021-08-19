@@ -5,12 +5,19 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ServerTCPLibrary.WorkWithDate
+namespace ServerTCPLibrary.WorkWithData
 {
+    /// <summary>
+    /// Class for work with data
+    /// </summary>
     public class DataProcess
     {
-
-        public double[] ReadVector(string s)
+        /// <summary>
+        /// Сreating a vector from a string
+        /// </summary>
+        /// <param name="s">string</param>
+        /// <returns>vector</returns>
+        public double[] CreateVector(string s)
         {
             string[] str = s.Split('\n');
             double[] b = new double[str.Length];
@@ -21,7 +28,12 @@ namespace ServerTCPLibrary.WorkWithDate
             return b;
         }
 
-        public double[,] ReadMainMatrix(string s)
+        /// <summary>
+        /// Сreating a main matrix from a string
+        /// </summary>
+        /// <param name="s">string</param>
+        /// <returns>main matrix</returns>
+        public double[,] CreateMainMatrix(string s)
         {
             string[] str = s.Split('\n');
             string rowL = Regex.Replace(str[0], @"\s+", " ", RegexOptions.None);
@@ -40,7 +52,12 @@ namespace ServerTCPLibrary.WorkWithDate
             }
             return a;
         }
-
+        /// <summary>
+        /// Method for creating data to send
+        /// </summary>
+        /// <param name="str">string with data</param>
+        /// <param name="a">Main matrix</param>
+        /// <param name="b">Vector</param>
         public void GetDate(string str, out double[,] a, out double[] b)
         {
             string[] mas = str.Split('\n');
@@ -50,7 +67,7 @@ namespace ServerTCPLibrary.WorkWithDate
                 builderA.Append(mas[i]);
                 builderA.Append("\n");
             }
-            a = ReadMainMatrix(builderA.ToString());
+            a = CreateMainMatrix(builderA.ToString());
 
             StringBuilder builderB = new StringBuilder();
             for (int i = mas.Length / 2; i < mas.Length - 1; i++)
@@ -58,7 +75,7 @@ namespace ServerTCPLibrary.WorkWithDate
                 builderB.Append(mas[i]);
                 builderB.Append("\n");
             }
-            b = ReadVector(builderB.ToString());
+            b = CreateVector(builderB.ToString());
         }
     }
 }

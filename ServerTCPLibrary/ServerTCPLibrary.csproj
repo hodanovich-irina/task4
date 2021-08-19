@@ -45,8 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLAYMethods\GaussianMethod.cs" />
     <Compile Include="SLAYMethods\ISLAY.cs" />
-    <Compile Include="SLAYMethods\MyEvent.cs" />
-    <Compile Include="WorkWithDate\DataProcess.cs" />
+    <Compile Include="DelegateAndEvent\MyEvent.cs" />
+    <Compile Include="WorkWithData\DataProcess.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

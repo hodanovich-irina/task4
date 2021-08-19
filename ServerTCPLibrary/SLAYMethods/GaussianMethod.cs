@@ -6,18 +6,37 @@ using System.Threading.Tasks;
 
 namespace ServerTCPLibrary.SLAYMethods
 {
-    
+    /// <summary>
+    /// Class for gaussian method
+    /// </summary>
     public class GaussianMethod : ISLAY
     {
-
+        /// <summary>
+        /// Number row
+        /// </summary>
         public int NumRow { get; set; }
+        /// <summary>
+        /// Number column
+        /// </summary>
         public int NumColum { get; set; }
+        /// <summary>
+        /// Main matrix
+        /// </summary>
         public double[,] MainMatrix { get; set; }
+        /// <summary>
+        /// Vector
+        /// </summary>
         public double[] Vector { get; set; }
+        /// <summary>
+        /// Result
+        /// </summary>
         public double[] XResult { get; set; }
 
-
-
+        /// <summary>
+        /// Constructor with params
+        /// </summary>
+        /// <param name="row">Number row</param>
+        /// <param name="colum">Number column</param>
         public GaussianMethod(int row, int colum) 
         {
             NumColum = colum;
@@ -27,8 +46,10 @@ namespace ServerTCPLibrary.SLAYMethods
             XResult = new double[NumRow];
         }
 
-       
-       
+        /// <summary>
+        /// Method for sort main matrix
+        /// </summary>
+        /// <param name="numSortRow">Number row for sort</param>
         private void SortMethod(int numSortRow) 
         {
             double max = MainMatrix[numSortRow, numSortRow];
@@ -55,6 +76,12 @@ namespace ServerTCPLibrary.SLAYMethods
                 }
             }
         }
+        /// <summary>
+        /// Method for get solution
+        /// </summary>
+        /// <param name="A">Main matrix</param>
+        /// <param name="b">Vector</param>
+        /// <returns>XResult</returns>
         public double[] GaussianSolution(double[,] A, double[] b)
         {
             MainMatrix = A;
@@ -90,6 +117,39 @@ namespace ServerTCPLibrary.SLAYMethods
                 XResult[i] = Math.Round(XResult[i], 1);
             }
             return XResult;
+        }
+        /// <summary>
+        /// Method overriding Equals()
+        /// </summary>
+        /// <param name="obj">Object</param>
+        /// <returns>True or false</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            GaussianMethod gaussian = obj as GaussianMethod;
+            if (gaussian == null)
+                return false;
+            if (MainMatrix != gaussian.MainMatrix || NumColum != gaussian.NumColum || NumRow != gaussian.NumRow || Vector != gaussian.Vector || XResult != gaussian.XResult)
+                return false;
+            return true;
+        }
+        /// <summary>
+        /// Override method ToString()
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return NumColum.ToString();
+        }
+
+        /// <summary>
+        /// Method overriding GetHashCode()
+        /// </summary>
+        /// <returns>Hash-code</returns>
+        public override int GetHashCode()
+        {
+            return NumColum;
         }
     }
 }

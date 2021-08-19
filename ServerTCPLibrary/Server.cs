@@ -5,20 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using ServerTCPLibrary.WorkWithDate;
+using ServerTCPLibrary.WorkWithData;
 using ServerTCPLibrary.SLAYMethods;
+using ServerTCPLibrary.DelegateAndEvent;
 
 
 namespace ServerTCPLibrary
 {
-   
+   /// <summary>
+   /// Class for server
+   /// </summary>
     public class Server
     {
-        
-        public string ServerData(int clientNum, UI UserInfoHandler)
+        /// <summary>
+        /// ip 
+        /// </summary>
+        const string ip = "127.0.0.1";
+        /// <summary>
+        /// port
+        /// </summary>
+        const int port = 8080;
+
+        /// <summary>
+        /// Method for receiving data by the server and sending a response to the client
+        /// </summary>
+        /// <param name="clientNum">Number of client</param>
+        /// <param name="InfoHandler">event handler</param>
+        /// <returns>decision line</returns>
+        public string ServerData(int clientNum, SLAY InfoHandler)
         {
-            const string ip = "127.0.0.1";
-            const int port = 8080;
             var tcpEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
             var tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             tcpSocket.Bind(tcpEndPoint);
@@ -50,11 +65,11 @@ namespace ServerTCPLibrary
                 {
                     answ.Append(x[i] + "\n");
                 }
-                myEvent.SLAYEvent += UserInfoHandler;
+                myEvent.SLAYEvent += delegate () {
+                    InfoHandler();
+                };
 
-                // Запустим событие
                 myEvent.OnSLAYEvent();
-
                 listener.Send(Encoding.UTF8.GetBytes(answ.ToString()));
                 listener.Shutdown(SocketShutdown.Both);
                 listener.Close();
