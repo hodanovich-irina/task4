@@ -45,15 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLAYMethods\GaussianMethod.cs" />
     <Compile Include="SLAYMethods\ISLAY.cs" />
+    <Compile Include="SLAYMethods\MyEvent.cs" />
+    <Compile Include="WorkWithDate\DataProcess.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FileWork\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClientTCPLibrary\ClientTCPLibrary.csproj">
-      <Project>{8c6888d9-e032-4dae-a9ef-c63ad29493a9}</Project>
-      <Name>ClientTCPLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

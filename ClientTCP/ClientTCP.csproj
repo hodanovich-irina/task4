@@ -58,6 +58,10 @@
       <Project>{900e8db6-e536-4380-b1ad-4130ac5e0373}</Project>
       <Name>ServerTCPLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerTCP\ServerTCP.csproj">
+      <Project>{4d7719d6-081b-4d22-a6ef-448c5896e75b}</Project>
+      <Name>ServerTCP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

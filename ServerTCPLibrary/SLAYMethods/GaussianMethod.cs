@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClientTCPLibrary.FileWork;
 
 namespace ServerTCPLibrary.SLAYMethods
 {
-
+    
     public class GaussianMethod : ISLAY
     {
+
         public int NumRow { get; set; }
         public int NumColum { get; set; }
         public double[,] MainMatrix { get; set; }
         public double[] Vector { get; set; }
         public double[] XResult { get; set; }
+
 
 
         public GaussianMethod(int row, int colum) 
@@ -26,6 +27,8 @@ namespace ServerTCPLibrary.SLAYMethods
             XResult = new double[NumRow];
         }
 
+       
+       
         private void SortMethod(int numSortRow) 
         {
             double max = MainMatrix[numSortRow, numSortRow];
@@ -84,11 +87,9 @@ namespace ServerTCPLibrary.SLAYMethods
                     XResult[i] -= MainMatrix[i, j] * XResult[j];
 
                 XResult[i] /= MainMatrix[i, i];
-                XResult[i] = Math.Round(XResult[i], 5);
+                XResult[i] = Math.Round(XResult[i], 1);
             }
             return XResult;
-
-
         }
     }
 }
